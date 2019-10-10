@@ -59,7 +59,7 @@ class TransferController extends AbstractController
 
           // updates the 'userFilename' property to store the PDF file name
           // instead of its contents
-          $transfer->setUserFilename($newFilename);
+          $transfer->setFilename($newFilename);
       }
 
       // ... persist the $transfer variable or any other work
