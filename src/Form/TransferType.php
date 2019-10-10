@@ -13,7 +13,7 @@ class TransferType extends AbstractType
     {
         $builder
             // ->add('fileName')
-            ->add('Transfer', FileType::class, [
+            ->add('file', FileType::class, [
                 'label' => 'Your file (PDF)',
 
                 // unmapped means that this field is not associated to any entity property
@@ -26,7 +26,7 @@ class TransferType extends AbstractType
                 // unmapped fields can't define their validation using annotations
                 // in the associated entity, so you can use the PHP constraint classes
                 'constraints' => [
-                    new file([
+                    new File([
                         'maxSize' => '1024k',
                         'mimeTypes' => [
                             'application/pdf',
