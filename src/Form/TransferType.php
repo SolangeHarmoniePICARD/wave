@@ -23,7 +23,7 @@ class TransferType extends AbstractType
                 'mapped' => false,
 
                 // make it optional so you don't have to re-upload the PDF file
-                // everytime you edit the Product details
+                // everytime you edit the Transfer details
                 'required' => false,
 
                 // unmapped fields can't define their validation using annotations
