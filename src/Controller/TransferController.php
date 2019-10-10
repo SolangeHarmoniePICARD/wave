@@ -26,11 +26,8 @@ class TransferController extends AbstractController
    /**
     * @Route("/transfer/new")
     */
-  public function new (Request $request){
+  public function new(Request $request){
     $transfer = new Transfer();
-    $transfer->setFileName("test");
-    $transfer->setSender("test sender");
-    $transfer->setRecipient("test recipient");
 
     $form = $this->createForm(TransferType::class, $transfer);
     $form->handleRequest($request);
