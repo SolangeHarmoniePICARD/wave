@@ -21,6 +21,23 @@ class Transfer
      */
     private $fileName;
 
+    public function getFileName()
+    {
+      return $this->fileName;
+    }
+
+    public function setFileName($fileName)
+    {
+      $this->fileName = $fileName;
+
+      return $this;
+    }
+
+    /**
+     * @ORM\Column(type="file", length=255)
+     */
+    private $file;
+
     /**
      * @ORM\Column(type="string", length=255)
      */
