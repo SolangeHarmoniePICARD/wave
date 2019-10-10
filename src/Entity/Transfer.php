@@ -22,11 +22,6 @@ class Transfer
     private $fileName;
 
     /**
-     * @ORM\Column(type="file", length=255)
-     */
-    private $file;
-
-    /**
      * @ORM\Column(type="string", length=255)
      */
     private $sender;
