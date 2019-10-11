@@ -52,7 +52,7 @@ class TransferType extends AbstractType
             ])
             ->add('recipientName', TextType::class, [
               'label' => false,
-              'attr' => ['placeholder' => 'Recipient name'],
+              'attr' => ['placeholder' => 'Name'],
             ])
             ->add('recipient', TextType::class, [
               'label' => false,

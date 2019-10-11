@@ -74,7 +74,7 @@
 h1 {
   font-family: 'Lato',sans-serif;
   font-size: 4em;
-  color: #DAA520 !important; 
+  color: #DAA520 !important;
   outline: none;
 }
 
@@ -82,56 +82,9 @@ h1 {
 	 background-color: #234;
 }
 
-
-/* body {
-  background-image: url("../images/waves.svg");
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-color: white;
-} */
-
-/* html, body {
-	 height: 100%;
+.waveform {
+  background-image: linear-gradient(to top, #5581ad 0%, #e7f0fd 100%);
+  border-radius: 0.4em;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.3);
+  opacity: 0.9
 }
- body {
-	 background: radial-gradient(ellipse at center, rgba(255, 254, 234, 1) 0%, rgba(255, 254, 234, 1) 35%, #b7e8eb 100%);
-	 overflow: hidden;
-}
- .ocean {
-	 height: 5%;
-	 width: 100%;
-	 position: absolute;
-	 bottom: 0;
-	 left: 0;
-	 background: #015871;
-}
- .wave {
-	 background: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/85486/wave.svg) repeat-x;
-	 position: absolute;
-	 top: -198px;
-	 width: 6400px;
-	 height: 198px;
-	 animation: wave 7s cubic-bezier(0.36, 0.45, 0.63, 0.53) infinite;
-	 transform: translate3d(0, 0, 0);
-}
- .wave:nth-of-type(2) {
-	 top: -175px;
-	 animation: wave 7s cubic-bezier(0.36, 0.45, 0.63, 0.53) -0.125s infinite, swell 7s ease -1.25s infinite;
-	 opacity: 1;
-}
- @keyframes wave {
-	 0% {
-		 margin-left: 0;
-	}
-	 100% {
-		 margin-left: -1600px;
-	}
-}
- @keyframes swell {
-	 0%, 100% {
-		 transform: translate3d(0, -25px, 0);
-	}
-	 50% {
-		 transform: translate3d(0, 5px, 0);
-	}
-} */
