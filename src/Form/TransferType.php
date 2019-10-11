@@ -42,21 +42,13 @@ class TransferType extends AbstractType
                 ])
               ],
             ])
-            ->add('senderName', TextType::class, [
+            ->add('recipient', TextType::class, [
               'label' => false,
-              'attr' => ['placeholder' => 'Your name'],
+              'attr' => ['placeholder' => 'Send to'],
             ])
             ->add('sender', TextType::class, [
               'label' => false,
               'attr' => ['placeholder' => 'Your email'],
-            ])
-            ->add('recipientName', TextType::class, [
-              'label' => false,
-              'attr' => ['placeholder' => 'Name'],
-            ])
-            ->add('recipient', TextType::class, [
-              'label' => false,
-              'attr' => ['placeholder' => 'Send to'],
             ])
             ->add('message', TextareaType::class, [
               'label' => false,

@@ -36,16 +36,6 @@ class Transfer
      */
     private $message;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $senderName;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $recipientName;
-
     public function getId(): ?int
     {
         return $this->id;
@@ -95,30 +85,6 @@ class Transfer
     public function setMessage(?string $message): self
     {
         $this->message = $message;
-
-        return $this;
-    }
-
-    public function getSenderName(): ?string
-    {
-        return $this->senderName;
-    }
-
-    public function setSenderName(?string $senderName): self
-    {
-        $this->senderName = $senderName;
-
-        return $this;
-    }
-
-    public function getRecipientName(): ?string
-    {
-        return $this->recipientName;
-    }
-
-    public function setRecipientName(?string $recipientName): self
-    {
-        $this->recipientName = $recipientName;
 
         return $this;
     }
