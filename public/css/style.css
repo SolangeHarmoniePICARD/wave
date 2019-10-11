@@ -1,6 +1,137 @@
-body {
+::selection {
+	 background-color: salmon;
+	 color: white;
+}
+ .parallax > use {
+	 animation: move-forever 12s linear infinite;
+}
+ .parallax > use:nth-child(1) {
+	 animation-delay: -2s;
+}
+ .parallax > use:nth-child(2) {
+	 animation-delay: -2s;
+	 animation-duration: 5s;
+}
+ .parallax > use:nth-child(3) {
+	 animation-delay: -4s;
+	 animation-duration: 3s;
+}
+ @keyframes move-forever {
+	 0% {
+		 transform: translate(-90px, 0%);
+	}
+	 100% {
+		 transform: translate(85px, 0%);
+	}
+}
+ .editorial {
+	 display: block;
+	 width: 100%;
+	 height: 10em;
+	 max-height: 100vh;
+	 margin: 0;
+}
+ body {
+	 background-color: #323232;
+	 margin: 0;
+	 max-height: 100vh;
+	 overflow: hidden;
+	 padding: 9em 0 0 0;
+}
+ .content {
+	 font-family: 'Lato', sans-serif;
+	 text-align: center;
+	 background-color: #2d55aa;
+	 text-align: center;
+	 min-height: 75vh;
+	 margin: -0.1em 0 0 0;
+	 padding: 1em;
+	 color: #eee;
+	 font-size: 2em;
+	 font-weight: 300;
+}
+ .content {
+	 font-size: 1em;
+}
+.content h1 {
+	 margin-top: -1.3em;
+	 font-weight: 100;
+	 font-size: 5em;
+	 user-select: none;
+	 cursor: default;
+
+}
+/*prevent many large-by-comparison ripples by shrinking the height*/
+ @media (max-width: 50em) {
+	   h1 {
+		 font-size: 12vmax;
+	}
+	 .editorial {
+		 height: 17vw;
+	}
+}
+
+h1 {
+  font-family: 'Lato',sans-serif;
+  font-size: 4em;
+  color: #DAA520 !important; 
+  outline: none;
+}
+
+ body {
+	 background-color: #234;
+}
+
+
+/* body {
   background-image: url("../images/waves.svg");
   background-size: cover;
   background-repeat: no-repeat;
   background-color: white;
+} */
+
+/* html, body {
+	 height: 100%;
 }
+ body {
+	 background: radial-gradient(ellipse at center, rgba(255, 254, 234, 1) 0%, rgba(255, 254, 234, 1) 35%, #b7e8eb 100%);
+	 overflow: hidden;
+}
+ .ocean {
+	 height: 5%;
+	 width: 100%;
+	 position: absolute;
+	 bottom: 0;
+	 left: 0;
+	 background: #015871;
+}
+ .wave {
+	 background: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/85486/wave.svg) repeat-x;
+	 position: absolute;
+	 top: -198px;
+	 width: 6400px;
+	 height: 198px;
+	 animation: wave 7s cubic-bezier(0.36, 0.45, 0.63, 0.53) infinite;
+	 transform: translate3d(0, 0, 0);
+}
+ .wave:nth-of-type(2) {
+	 top: -175px;
+	 animation: wave 7s cubic-bezier(0.36, 0.45, 0.63, 0.53) -0.125s infinite, swell 7s ease -1.25s infinite;
+	 opacity: 1;
+}
+ @keyframes wave {
+	 0% {
+		 margin-left: 0;
+	}
+	 100% {
+		 margin-left: -1600px;
+	}
+}
+ @keyframes swell {
+	 0%, 100% {
+		 transform: translate3d(0, -25px, 0);
+	}
+	 50% {
+		 transform: translate3d(0, 5px, 0);
+	}
+} */

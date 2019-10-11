@@ -9,12 +9,12 @@
 </style>
 
 <div class="container">
-  <div class="row p-5">
+  <h1 class="text-center text-warning">Welcome to Wave!</h1>
+  <div class="row mt-5 p-5">
     <div class="col-4">
-      <h1 class="text-center dark-text">Welcome to Wave!</h1>
       <div class="form-group">
         {{ form_start(form) }}
-          
+
 
 
 
@@ -22,6 +22,31 @@
         {{ form_end(form) }}
       </div>
     </div>
+
+    <!-- <div class="ocean">
+      <div class="wave"></div>
+      <div class="wave"></div>
+    </div> -->
   </div>
 </div>
+<svg class="editorial"
+     xmlns="http://www.w3.org/2000/svg"
+     xmlns:xlink="http://www.w3.org/1999/xlink"
+     viewBox="0 24 150 28"
+     preserveAspectRatio="none">
+ <defs>
+ <path id="gentle-wave"
+ d="M-160 44c30 0
+    58-18 88-18s
+    58 18 88 18
+    58-18 88-18
+    58 18 88 18
+    v44h-352z" />
+  </defs>
+  <g class="parallax">
+   <use xlink:href="#gentle-wave" x="50" y="0" fill="#4579e2"/>
+   <use xlink:href="#gentle-wave" x="50" y="3" fill="#3461c1"/>
+   <use xlink:href="#gentle-wave" x="50" y="6" fill="#2d55aa"/>
+  </g>
+</svg>
 {% endblock %}
