@@ -87,4 +87,16 @@ h1 {
   border-radius: 0.4em;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.3);
   opacity: 0.9
+  position: relative;
+}
+
+.logo {
+  position: absolute;
+  bottom: 90%;
+  left: 5%;
+}
+
+.logo img {
+  width: 100px;
+  transform: scaleX(-1);
 }
