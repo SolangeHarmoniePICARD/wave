@@ -92,11 +92,16 @@ h1 {
 
 .logo {
   position: absolute;
-  bottom: 88.5%;
+  bottom: 96%;
   left: 5%;
 }
 
 .logo img {
   width: 100px;
   transform: scaleX(-1);
+  animation: rockit 4s ease infinite alternate;
+}
+@keyframes rockit {
+  from { transform: translatey(30px) rotate(-15deg); }
+  to { transform: translatey(30px) rotate(5deg); }
 }
