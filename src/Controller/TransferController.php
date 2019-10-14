@@ -10,6 +10,8 @@ use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Bundle\SwiftmailerBundle\Swiftmailer;
+// require_once '../../vendor/autoload.php';
 
 class TransferController extends AbstractController
 {
@@ -24,7 +26,7 @@ class TransferController extends AbstractController
   //créer un formulaire pour transfert
 
    /**
-    * @Route("/transfer/new")
+    * @Route("/", name ="transfer")
     */
   public function new(Request $request){
     $transfer = new Transfer();
@@ -52,31 +54,34 @@ class TransferController extends AbstractController
               );
           } catch (FileException $e) {
               // ... handle exception if something happens during file upload
+              echo $e;
           }
 
           // updates the 'userFilename' property to store the PDF file name
           // instead of its contents
           $transfer->setFilename($newFilename);
-
-          // Create the message
-          $message = (new Swift_Message())
-            // Give the message a subject
-            ->setSubject('Your subject'),
-            // Set the From address with an associative array
-            ->setFrom(['john@doe.com' => 'John Doe']),
-            // Set the To addresses with an associative array (setTo/setCc/setBcc)
-            ->setTo(['other@domain.org' => 'A name']),
-            // Give it a body
-            ->setBody('Here is the message itself'),
-            // And optionally an alternative body
-            ->addPart('<q>Here is the message itself</q>', 'text/html'),
-            // Optionally add any attachments
-            ->attach(Swift_Attachment::fromPath(asset('uploads/files/' ~ $newFilename))->setFilename($userFile->getClientOriginalName()))
-            ;
+          // $this->send_mail($transfer, $mailer);
       }
 
       // ... persist the $transfer variable or any other work
-      return $this->redirect($this->generateUrl('app_transfer_list'));
+
+      $mail = (new \Swift_Message('Hello Email'))
+      ->setFrom($transfer->getSender)
+      ->setTo($transfer->getRecipient)
+      ->setBody($tranfer->message
+      // $this->renderView(
+      //     // templates/emails/registration.html.twig
+      //     'emails/registration.html.twig',
+      //     ['name' => $name]
+      ,
+      'text/html'
+      )
+      ->attach(Swift_Attachment::fromPath(asset('uploads/files/' , $transfer->newFilename))
+      // ->setFilename($userFile->getClientOriginalName())
+      )
+      ;
+      
+      $mailer->send($mail);
     }
 
     return $this->render('transfer/index.html.twig', [
@@ -84,4 +89,32 @@ class TransferController extends AbstractController
       'controller_name' => 'TransferController'
     ]);
   }
+
+  /**
+  * @Route("/send", name ="send")
+  */
+  public function send_mail(\Swift_Mailer $mailer)
+  {
+    // $transport = (new Swift_SmtpTransport('smtp.example.org', 25));
+    // Create the Mailer using your created Transport
+    // $mailer = new Swift_Mailer($transport);
+
+    // return $this->render(...);
+  }
+
 }
+// Create the message
+// $message = (new Swift_Message())
+//   // Give the message a subject
+//   ->setSubject('Your subject')
+//   // Set the From address with an associative array
+//   ->setFrom(['john@doe.com' => 'John Doe'])
+//   // Set the To addresses with an associative array (setTo/setCc/setBcc)
+//   ->setTo(['other@domain.org' => 'A name'])
+//   // Give it a body
+//   ->setBody('Here is the message itself')
+//   // And optionally an alternative body
+//   ->addPart('<q>Here is the message itself</q>', 'text/html')
+//   // Optionally add any attachments
+  // ->attach( Swift_Attachment::fromPath(asset('uploads/files/' , $newFilename))->setFilename( $userFile->getClientOriginalName() ) );
+//   ;
