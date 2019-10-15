@@ -50,20 +50,17 @@ class TransferController extends AbstractController
           // instead of its contents
           $transfer->setFilename($newFilename);
 
+          // insert into bdd
           $entityManager = $this->getDoctrine()->getManager();
-
-          $entityManager->persist($elements);
+          $entityManager->persist($transfer);
           $entityManager->flush();
       }
 
-
-
-      // send email
       $mail = (new \Swift_Message())
         ->setSubject('Wave - Fichiers envoyés par ' . $transfer->getSender())
         ->setFrom([$transfer->getSender()])
         ->setTo([$transfer->getRecipient()]);
-
+        // send email
         $cid = $mail->embed(\Swift_Image::fromPath('images/spouting-whale.png'));
         $mail->setBody(
           $this->renderView('transfer/email.html.twig', [
