@@ -10,23 +10,15 @@ use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
+// use Symfony\Bundle\SwiftmailerBundle\Swiftmailer;
+// require_once '../../vendor/autoload.php';
 
 class TransferController extends AbstractController
 {
-
-  // public function index()
-  // {
-  //     return $this->render('transfer/index.html.twig', [
-  //         'controller_name' => 'TransferController',
-  //     ]);
-  // }
-
-  //créer un formulaire pour transfert
-
-   /**
-    * @Route("/")
-    */
-  public function new(Request $request){
+  /**
+  * @Route("/transfer/new", name ="transfer")
+  */
+  public function new(Request $request, \Swift_Mailer $mailer){
     $transfer = new Transfer();
 
     $form = $this->createForm(TransferType::class, $transfer);
@@ -61,7 +53,24 @@ class TransferController extends AbstractController
 
       // ... persist the $transfer variable or any other work
 
-      return $this->redirect($this->generateUrl('app_transfer_list'));
+      // Create the message
+      $mail = (new \Swift_Message())
+        ->setSubject('Wave - Fichiers envoyés par ' . $transfer->getSender())
+        ->setFrom([$transfer->getSender()])
+        ->setTo([$transfer->getRecipient()]);
+
+        $cid = $mail->embed(\Swift_Image::fromPath('images/spouting-whale.png'));
+        $mail->setBody(
+          $this->renderView('transfer/email.html.twig', [
+            'recipient' => $transfer->getRecipient(),
+            'sender' => $transfer->getSender(),
+            'link' => 'zip/'.$transfer->getFileName().'.zip',
+            'logo' => $cid
+          ]),
+          'text/html'
+        );
+
+        $mailer->send($mail);
     }
 
     return $this->render('transfer/index.html.twig', [
