@@ -15,19 +15,9 @@ use Symfony\Bundle\SwiftmailerBundle\Swiftmailer;
 
 class TransferController extends AbstractController
 {
-
-  // public function index()
-  // {
-  //     return $this->render('transfer/index.html.twig', [
-  //         'controller_name' => 'TransferController',
-  //     ]);
-  // }
-
-  //créer un formulaire pour transfert
-
-   /**
-    * @Route("/", name ="transfer")
-    */
+  /**
+  * @Route("/", name ="transfer")
+  */
   public function new(Request $request){
     $transfer = new Transfer();
 
@@ -65,23 +55,24 @@ class TransferController extends AbstractController
 
       // ... persist the $transfer variable or any other work
 
-      $mail = (new \Swift_Message('Hello Email'))
-      ->setFrom($transfer->getSender)
-      ->setTo($transfer->getRecipient)
-      ->setBody($tranfer->message
-      // $this->renderView(
-      //     // templates/emails/registration.html.twig
-      //     'emails/registration.html.twig',
-      //     ['name' => $name]
-      ,
-      'text/html'
-      )
-      ->attach(Swift_Attachment::fromPath(asset('uploads/files/' , $transfer->newFilename))
-      // ->setFilename($userFile->getClientOriginalName())
-      )
-      ;
-      
-      $mailer->send($mail);
+      // Create the message
+      $mail = (new \Swift_Message())
+        ->setSubject('Wave - Fichiers envoyés par ' . $fileTransfer->getNameFrom())
+        ->setFrom([$fileTransfer->getSender()])
+        ->setTo([$fileTransfer->getRecipient()])
+
+        $cid = $mail->embed(\Swift_Image::fromPath('images/spouting-whale.png'));
+        $mail->setBody(
+          $this->renderView('transfer/email.html.twig', [
+            'recipientName' => $fileTransfer->getRecipient(),
+            'sender' => $fileTransfer->getSender(),
+            'link' => 'zip/'.$fileTransfer->getFileName().'.zip',
+            'logo' => $cid
+          ]),
+          'text/html'
+        );
+
+        $mailer->send($mail);
     }
 
     return $this->render('transfer/index.html.twig', [
@@ -103,18 +94,3 @@ class TransferController extends AbstractController
   }
 
 }
-// Create the message
-// $message = (new Swift_Message())
-//   // Give the message a subject
-//   ->setSubject('Your subject')
-//   // Set the From address with an associative array
-//   ->setFrom(['john@doe.com' => 'John Doe'])
-//   // Set the To addresses with an associative array (setTo/setCc/setBcc)
-//   ->setTo(['other@domain.org' => 'A name'])
-//   // Give it a body
-//   ->setBody('Here is the message itself')
-//   // And optionally an alternative body
-//   ->addPart('<q>Here is the message itself</q>', 'text/html')
-//   // Optionally add any attachments
-  // ->attach( Swift_Attachment::fromPath(asset('uploads/files/' , $newFilename))->setFilename( $userFile->getClientOriginalName() ) );
-//   ;
