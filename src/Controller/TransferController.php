@@ -10,14 +10,22 @@ use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Bundle\SwiftmailerBundle\Swiftmailer;
-// require_once '../../vendor/autoload.php';
 
 class TransferController extends AbstractController
 {
-  /**
-  * @Route("/", name ="transfer")
-  */
+
+  // public function index()
+  // {
+  //     return $this->render('transfer/index.html.twig', [
+  //         'controller_name' => 'TransferController',
+  //     ]);
+  // }
+
+  //créer un formulaire pour transfert
+
+   /**
+    * @Route("/")
+    */
   public function new(Request $request){
     $transfer = new Transfer();
 
@@ -44,35 +52,16 @@ class TransferController extends AbstractController
               );
           } catch (FileException $e) {
               // ... handle exception if something happens during file upload
-              echo $e;
           }
 
           // updates the 'userFilename' property to store the PDF file name
           // instead of its contents
           $transfer->setFilename($newFilename);
-          // $this->send_mail($transfer, $mailer);
       }
 
       // ... persist the $transfer variable or any other work
 
-      // Create the message
-      $mail = (new \Swift_Message())
-        ->setSubject('Wave - Fichiers envoyés par ' . $fileTransfer->getNameFrom())
-        ->setFrom([$fileTransfer->getSender()])
-        ->setTo([$fileTransfer->getRecipient()])
-
-        $cid = $mail->embed(\Swift_Image::fromPath('images/spouting-whale.png'));
-        $mail->setBody(
-          $this->renderView('transfer/email.html.twig', [
-            'recipientName' => $fileTransfer->getRecipient(),
-            'sender' => $fileTransfer->getSender(),
-            'link' => 'zip/'.$fileTransfer->getFileName().'.zip',
-            'logo' => $cid
-          ]),
-          'text/html'
-        );
-
-        $mailer->send($mail);
+      return $this->redirect($this->generateUrl('app_transfer_list'));
     }
 
     return $this->render('transfer/index.html.twig', [
@@ -80,17 +69,4 @@ class TransferController extends AbstractController
       'controller_name' => 'TransferController'
     ]);
   }
-
-  /**
-  * @Route("/send", name ="send")
-  */
-  public function send_mail(\Swift_Mailer $mailer)
-  {
-    // $transport = (new Swift_SmtpTransport('smtp.example.org', 25));
-    // Create the Mailer using your created Transport
-    // $mailer = new Swift_Mailer($transport);
-
-    // return $this->render(...);
-  }
-
 }
