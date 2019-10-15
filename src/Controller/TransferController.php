@@ -10,15 +10,15 @@ use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Bundle\SwiftmailerBundle\Swiftmailer;
+// use Symfony\Bundle\SwiftmailerBundle\Swiftmailer;
 // require_once '../../vendor/autoload.php';
 
 class TransferController extends AbstractController
 {
   /**
-  * @Route("/", name ="transfer")
+  * @Route("/transfer/new", name ="transfer")
   */
-  public function new(Request $request){
+  public function new(Request $request, \Swift_Mailer $mailer){
     $transfer = new Transfer();
 
     $form = $this->createForm(TransferType::class, $transfer);
@@ -57,16 +57,16 @@ class TransferController extends AbstractController
 
       // Create the message
       $mail = (new \Swift_Message())
-        ->setSubject('Wave - Fichiers envoyés par ' . $fileTransfer->getNameFrom())
-        ->setFrom([$fileTransfer->getSender()])
-        ->setTo([$fileTransfer->getRecipient()])
+        ->setSubject('Wave - Fichiers envoyés par ' . $transfer->getSender())
+        ->setFrom([$transfer->getSender()])
+        ->setTo([$transfer->getRecipient()]);
 
         $cid = $mail->embed(\Swift_Image::fromPath('images/spouting-whale.png'));
         $mail->setBody(
           $this->renderView('transfer/email.html.twig', [
-            'recipientName' => $fileTransfer->getRecipient(),
-            'sender' => $fileTransfer->getSender(),
-            'link' => 'zip/'.$fileTransfer->getFileName().'.zip',
+            'recipient' => $transfer->getRecipient(),
+            'sender' => $transfer->getSender(),
+            'link' => 'zip/'.$transfer->getFileName().'.zip',
             'logo' => $cid
           ]),
           'text/html'
@@ -84,13 +84,13 @@ class TransferController extends AbstractController
   /**
   * @Route("/send", name ="send")
   */
-  public function send_mail(\Swift_Mailer $mailer)
-  {
+  // public function send_mail(\Swift_Mailer $mailer)
+  // {
     // $transport = (new Swift_SmtpTransport('smtp.example.org', 25));
     // Create the Mailer using your created Transport
     // $mailer = new Swift_Mailer($transport);
 
     // return $this->render(...);
-  }
+  // }
 
 }
