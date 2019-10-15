@@ -15,14 +15,6 @@ use Symfony\Bundle\SwiftmailerBundle\Swiftmailer;
 
 class TransferController extends AbstractController
 {
-
-  // public function index()
-  // {
-  //     return $this->render('transfer/index.html.twig', [
-  //         'controller_name' => 'TransferController',
-  //     ]);
-  // }
-
   //créer un formulaire pour transfert
 
    /**
@@ -80,7 +72,7 @@ class TransferController extends AbstractController
       // ->setFilename($userFile->getClientOriginalName())
       )
       ;
-      
+
       $mailer->send($mail);
     }
 
