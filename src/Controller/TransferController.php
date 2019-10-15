@@ -34,7 +34,7 @@ class TransferController extends AbstractController
           $originalFilename = pathinfo($userFile->getClientOriginalName(), PATHINFO_FILENAME);
           // this is needed to safely include the file name as part of the URL
           $safeFilename = transliterator_transliterate('Any-Latin; Latin-ASCII; [^A-Za-z0-9_] remove; Lower()', $originalFilename);
-          $newFilename = $safeFilename.'-'.uniqid('').'.'.$userFile->guessExtension();
+          $newFilename = $safeFilename.'-'.uniqid().'.'.$userFile->guessExtension();
 
           // Move the file to the directory where files are stored
           try {
@@ -49,9 +49,14 @@ class TransferController extends AbstractController
           // updates the 'userFilename' property to store the PDF file name
           // instead of its contents
           $transfer->setFilename($newFilename);
+
+          $entityManager = $this->getDoctrine()->getManager();
+
+          $entityManager->persist($elements);
+          $entityManager->flush();
       }
 
-      // ... persist the $transfer variable or any other work
+
 
       // send email
       $mail = (new \Swift_Message())
